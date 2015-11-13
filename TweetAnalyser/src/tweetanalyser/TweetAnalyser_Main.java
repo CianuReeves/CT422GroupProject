@@ -6,6 +6,11 @@
 package tweetanalyser;
 
 import twitter4j.*;
+import twitter4j.auth.*;
+import twitter4j.api.*;
+import twitter4j.conf.ConfigurationBuilder;
+
+
 /**
  *
  * @author Cathal
@@ -18,17 +23,23 @@ public class TweetAnalyser_Main {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        try {
- Twitter twitter = new Twitter("username", "password");
- twitter.verifyCredentials();
- System.out.println("You're logged in!");
- java.util.List<Status> statusList = twitter.getUserTimeline();
- String s = String.valueOf(statusList.get(0).getText());
- } catch (TwitterException e) {
- 
- System.out.println("Login failed");
- 
- }
+        
+  try {
+            ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setDebugEnabled(true)
+          .setOAuthConsumerKey("qnL70f170zly7rCl73OfLIaHk")
+          .setOAuthConsumerSecret("QVR1RnW6mK9fWyDQJSQy9lWOvpCd9RTVapM76ym5B1OTJNKMDt")
+          .setOAuthAccessToken("4172361316-o8VJSIyiE3WBtr5gfHUziNM9UuYSwdTk2LHPkCF")
+          .setOAuthAccessTokenSecret("5W8yCqnrnJJzNEaS6e904tbs2FvU8NEDeOqHBkB1Rjz9k");
+            TwitterFactory factory = new TwitterFactory(cb.build());
+            Twitter twitter = factory.getInstance();
+           
+            String screenName = twitter.getScreenName();
+            System.out.println(screenName + " Logged In!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
     }
     
