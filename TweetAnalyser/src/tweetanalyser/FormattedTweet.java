@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package tweetanalyser;
+
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author Cian
@@ -12,19 +16,19 @@ package tweetanalyser;
 
 //This object will contain the reduced text and timestamp of a tweet only
 public class FormattedTweet {
-    private String[] text;
-    private String timestamp;
+    private ArrayList<String> text;
+    private Date timestamp;
     
     
     public FormattedTweet(){
     }
     
-    public FormattedTweet(String[] t, String ts){
+    public FormattedTweet(ArrayList<String> t, Date ts){
         this.timestamp = ts;
         this.text = t;
     }
     
-    public String getTime(){
+    public Date getTime(){
         return this.timestamp;
     } 
     
@@ -37,11 +41,11 @@ public class FormattedTweet {
         return sb.toString();
     }
     
-    public void setTime(String t){
+    public void setTime(Date t){
         this.timestamp = t;
     }
     
-    public void setText(String[] t){
+    public void setText(ArrayList<String> t){
         this.text = t;
     }
 }

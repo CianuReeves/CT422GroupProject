@@ -5,6 +5,7 @@
  */
 package tweetanalyser;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import twitter4j.*;
 import twitter4j.auth.*;
@@ -29,12 +30,12 @@ public class TweetAnalyser_Main {
         cb.setOAuthConsumerSecret("QVR1RnW6mK9fWyDQJSQy9lWOvpCd9RTVapM76ym5B1OTJNKMDt");
         cb.setOAuthAccessToken("4172361316-o8VJSIyiE3WBtr5gfHUziNM9UuYSwdTk2LHPkCF");
         cb.setOAuthAccessTokenSecret("5W8yCqnrnJJzNEaS6e904tbs2FvU8NEDeOqHBkB1Rjz9k");
-
+        String q = "Fallout4";
         Twitter twitter = new TwitterFactory(cb.build()).getInstance();
-        Query query = new Query("Fallout4");
+        Query query = new Query("q");
         int numberOfTweets = 500;
         long lastID = Long.MAX_VALUE;
-        ArrayList<Status> tweets = new ArrayList<Status>();
+        ArrayList<Status> tweets = new ArrayList();
         while (tweets.size() < numberOfTweets) {
             if (numberOfTweets - tweets.size() > 100) {
                 query.setCount(100);
@@ -57,7 +58,17 @@ public class TweetAnalyser_Main {
             query.setMaxId(lastID - 1);
         }
 
-        for (int i = 0; i < tweets.size(); i++) {
+        try{
+            ArrayList<FormattedTweet> fTweets = TweetAnalyser_Formatter.format(tweets,q);
+            for(FormattedTweet temp : fTweets){
+                System.out.println(temp.getText());
+            }
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        
+        /*for (int i = 0; i < tweets.size(); i++) {
             Status t = (Status) tweets.get(i);
 
             GeoLocation loc = t.getGeoLocation();
@@ -72,7 +83,7 @@ public class TweetAnalyser_Main {
             } else {
                 System.out.println(i + " USER: " + user + " wrote: " + msg);
             }
-        }
+        }*/
 
     }
 
