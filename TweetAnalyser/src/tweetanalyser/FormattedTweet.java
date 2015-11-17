@@ -18,14 +18,16 @@ import java.util.Date;
 public class FormattedTweet {
     private ArrayList<String> text;
     private Date timestamp;
+    private long id;
     
     
     public FormattedTweet(){
     }
     
-    public FormattedTweet(ArrayList<String> t, Date ts){
+    public FormattedTweet(ArrayList<String> t, Date ts, long id){
         this.timestamp = ts;
         this.text = t;
+        this.id = id;
     }
     
     public Date getTime(){
@@ -41,11 +43,19 @@ public class FormattedTweet {
         return sb.toString();
     }
     
+    public long getId(){
+        return this.id;
+    }
+    
     public void setTime(Date t){
         this.timestamp = t;
     }
     
     public void setText(ArrayList<String> t){
         this.text = t;
+    }
+    
+    public void setId(long id){
+        this.id = id;
     }
 }

@@ -63,10 +63,17 @@ public class TweetAnalyser_Main {
             for(FormattedTweet temp : fTweets){
                 System.out.println(temp.getText());
             }
+            
+            ArrayList<Word> words = TopFiveWords.getTopFive(fTweets);
+            for(Word word : words){
+                System.out.println(word.getWord()+" "+word.getCount());
+            }
         }
         catch (FileNotFoundException e){
             e.printStackTrace();
         }
+        
+
         
         /*for (int i = 0; i < tweets.size(); i++) {
             Status t = (Status) tweets.get(i);
