@@ -61,7 +61,7 @@ public abstract class TweetAnalyser_Formatter {
                         if(word.toLowerCase().equals(badWord)){
                             word = "";
                         }
-                        else if(word.length()>0 && (word.charAt(0)=='@' || word.charAt(0)=='#' || word.charAt(0)=='\n')){
+                        else if(word.length()>0 && (word.charAt(0)=='@' || word.charAt(0)=='#' || word.charAt(0)=='\n' || word.charAt(0)==' ' || word.contains("http"))){
                             word = "";
                         }
                     }

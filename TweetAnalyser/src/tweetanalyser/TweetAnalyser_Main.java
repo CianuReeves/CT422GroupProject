@@ -33,6 +33,7 @@ public class TweetAnalyser_Main {
         String q = "Fallout4";
         Twitter twitter = new TwitterFactory(cb.build()).getInstance();
         Query query = new Query("q");
+        query.setLang("en");
         int numberOfTweets = 500;
         long lastID = Long.MAX_VALUE;
         ArrayList<Status> tweets = new ArrayList();
@@ -60,9 +61,9 @@ public class TweetAnalyser_Main {
 
         try{
             ArrayList<FormattedTweet> fTweets = TweetAnalyser_Formatter.format(tweets,q);
-            for(FormattedTweet temp : fTweets){
+            /*for(FormattedTweet temp : fTweets){
                 System.out.println(temp.getText());
-            }
+            }*/
             
             ArrayList<Word> words = TopFiveWords.getTopFive(fTweets);
             for(Word word : words){
