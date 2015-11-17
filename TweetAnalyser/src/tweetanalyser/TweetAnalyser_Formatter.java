@@ -34,7 +34,7 @@ public abstract class TweetAnalyser_Formatter {
     }
     
     private static HashMap getBadWords() throws FileNotFoundException{
-        File file = new File("C:\\Users\\Cian\\Documents\\4BCT\\CT422 Modern Information Management\\Twitter\\CT422GroupProject\\TweetAnalyser\\src\\tweetanalyser\\StopWords.txt");
+        File file = new File("src\\tweetanalyser\\StopWords.txt");
         Scanner scanner = new Scanner(file);
         while(scanner.hasNextLine()) {
             ArrayList<String> temp = new ArrayList();
