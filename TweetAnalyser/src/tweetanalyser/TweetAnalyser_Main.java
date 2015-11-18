@@ -30,9 +30,9 @@ public class TweetAnalyser_Main {
         cb.setOAuthConsumerSecret("QVR1RnW6mK9fWyDQJSQy9lWOvpCd9RTVapM76ym5B1OTJNKMDt");
         cb.setOAuthAccessToken("4172361316-o8VJSIyiE3WBtr5gfHUziNM9UuYSwdTk2LHPkCF");
         cb.setOAuthAccessTokenSecret("5W8yCqnrnJJzNEaS6e904tbs2FvU8NEDeOqHBkB1Rjz9k");
-        String q = "Fallout4";
+        String q = "CharlieSheen";
         Twitter twitter = new TwitterFactory(cb.build()).getInstance();
-        Query query = new Query("q");
+        Query query = new Query(q);
         query.setLang("en");
         int numberOfTweets = 500;
         long lastID = Long.MAX_VALUE;

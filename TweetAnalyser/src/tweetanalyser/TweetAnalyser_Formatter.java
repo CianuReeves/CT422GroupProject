@@ -24,7 +24,7 @@ public abstract class TweetAnalyser_Formatter {
     
     public static ArrayList<FormattedTweet> format(ArrayList<Status> result, String queryWord) throws FileNotFoundException{
         
-        getBadWords();
+        getBadWords(queryWord);
         ArrayList<FormattedTweet> tweets = new ArrayList();
         
         for(Status status : result){
@@ -33,7 +33,7 @@ public abstract class TweetAnalyser_Formatter {
         return tweets;
     }
     
-    private static HashMap getBadWords() throws FileNotFoundException{
+    private static HashMap getBadWords(String q) throws FileNotFoundException{
         File file = new File("src\\tweetanalyser\\StopWords.txt");
         Scanner scanner = new Scanner(file);
         while(scanner.hasNextLine()) {
@@ -46,13 +46,21 @@ public abstract class TweetAnalyser_Formatter {
             badWords.put(""+s.charAt(0), temp);
         }
         
+        ArrayList<String> temp = new ArrayList();
+        q = q.toLowerCase();
+        if(badWords.containsKey(""+q.charAt(0))){
+            temp = badWords.get(""+q.charAt(0));
+        }
+        temp.add(q);
+        badWords.put(""+q.charAt(0), temp);
+       
         return badWords;
         
     }
     
     private static ArrayList deleteBadWords(String s){
         ArrayList<String> goodWords = new ArrayList();
-        String[] temp = s.split(" ");
+        String[] temp = s.replaceAll("[^a-zA-Z # @]", "").toLowerCase().split("\\s+");
         for(String word : temp){
             if(!word.isEmpty()){
                 String key = ""+word.charAt(0);
