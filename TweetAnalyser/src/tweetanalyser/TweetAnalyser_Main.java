@@ -7,6 +7,7 @@ package tweetanalyser;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import twitter4j.*;
 import twitter4j.auth.*;
 import twitter4j.api.*;
@@ -30,11 +31,11 @@ public class TweetAnalyser_Main {
         cb.setOAuthConsumerSecret("QVR1RnW6mK9fWyDQJSQy9lWOvpCd9RTVapM76ym5B1OTJNKMDt");
         cb.setOAuthAccessToken("4172361316-o8VJSIyiE3WBtr5gfHUziNM9UuYSwdTk2LHPkCF");
         cb.setOAuthAccessTokenSecret("5W8yCqnrnJJzNEaS6e904tbs2FvU8NEDeOqHBkB1Rjz9k");
-        String q = "CharlieSheen";
+        String q = "RouseyVsHolm";
         Twitter twitter = new TwitterFactory(cb.build()).getInstance();
         Query query = new Query(q);
         query.setLang("en");
-        int numberOfTweets = 500;
+        int numberOfTweets = 1000;
         long lastID = Long.MAX_VALUE;
         ArrayList<Status> tweets = new ArrayList();
         while (tweets.size() < numberOfTweets) {
@@ -52,7 +53,7 @@ public class TweetAnalyser_Main {
                         lastID = t.getId();
                     }
                 }
-
+                if(tweets.size()%100!=0 || tweets.isEmpty()) numberOfTweets=tweets.size();
             } catch (TwitterException te) {
                 System.out.println("Couldn't connect: " + te);
             };
@@ -61,14 +62,20 @@ public class TweetAnalyser_Main {
 
         try{
             ArrayList<FormattedTweet> fTweets = TweetAnalyser_Formatter.format(tweets,q);
+            List<WordGroup> wordGroups = TweetAnalyser_Formatter.createWordGroups(fTweets);
+            
             /*for(FormattedTweet temp : fTweets){
-                System.out.println(temp.getText());
+                System.out.println(temp.getText()+" "+temp.getTime());
             }*/
             
-            ArrayList<Word> words = TopFiveWords.getTopFive(fTweets);
-            for(Word word : words){
-                System.out.println(word.getWord()+" "+word.getCount());
+            for(WordGroup wordGroup : wordGroups){
+                ArrayList<Word> words = wordGroup.getWords();
+                System.out.println("\nTop Five Words for Time Period: "+wordGroup.getStartDate().toString()+" - "+wordGroup.getEndDate().toString());
+                for(Word word : words){
+                    System.out.println(word.getWord()+" "+word.getCount());
+                }
             }
+               
         }
         catch (FileNotFoundException e){
             e.printStackTrace();

@@ -8,8 +8,9 @@ package tweetanalyser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.List;
 import java.util.Scanner;
 import twitter4j.*;
 
@@ -79,6 +80,20 @@ public abstract class TweetAnalyser_Formatter {
         }
         
         return goodWords;
+    }
+    
+    public static List<WordGroup> createWordGroups(ArrayList<FormattedTweet> fTweets){
+        List<WordGroup> wordGroups = new ArrayList<>();
+        int count = (int)Math.ceil(fTweets.size()/50);
+        int i = 1;
+        
+        while(i<=count){
+            if(i*50<=fTweets.size()) wordGroups.add(new WordGroup(fTweets.subList((i-1)*50, i*50)));
+            else wordGroups.add(new WordGroup(fTweets.subList((i-1)*50, fTweets.size()-1)));
+            i++;
+        }
+        Collections.reverse(wordGroups);
+        return wordGroups;
     }
     
 }

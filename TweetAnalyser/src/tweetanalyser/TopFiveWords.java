@@ -6,13 +6,14 @@
 package tweetanalyser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Cian
  */
 public abstract class TopFiveWords {
-    public static ArrayList getTopFive(ArrayList<FormattedTweet> tweets){
+    public static ArrayList<Word> getTopFive(List<FormattedTweet> tweets){
         ArrayList<Word> words = new ArrayList();
         ArrayList<Word> topWords = new ArrayList();
         
