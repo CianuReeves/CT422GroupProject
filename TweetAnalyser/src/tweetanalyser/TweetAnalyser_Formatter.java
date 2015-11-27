@@ -18,11 +18,13 @@ import twitter4j.*;
  *
  * @author Cathal
  */
-//Removes any "Stop words" or similar words to reduce the text of the tweet, returns an array list of "FormattedTweet" Objects which contain the reduced text and the timestamp only
+
+//
 public abstract class TweetAnalyser_Formatter {
     
     private static HashMap<String, ArrayList<String>> badWords = new HashMap();
     
+    //This method returns FormattedTweets which have had unwanted words removed.
     public static ArrayList<FormattedTweet> format(ArrayList<Status> result, String queryWord) throws FileNotFoundException{
         
         getBadWords(queryWord);
@@ -34,6 +36,7 @@ public abstract class TweetAnalyser_Formatter {
         return tweets;
     }
     
+    //this method gets the words from out StopWords.txt
     private static HashMap getBadWords(String q) throws FileNotFoundException{
         File file = new File("src\\tweetanalyser\\StopWords.txt");
         Scanner scanner = new Scanner(file);
@@ -59,6 +62,7 @@ public abstract class TweetAnalyser_Formatter {
         
     }
     
+    //This method removes any unwanted words from the tweets
     private static ArrayList deleteBadWords(String s){
         ArrayList<String> goodWords = new ArrayList();
         String[] temp = s.replaceAll("[^a-zA-Z # @]", "").toLowerCase().split("\\s+");
@@ -82,6 +86,7 @@ public abstract class TweetAnalyser_Formatter {
         return goodWords;
     }
     
+    //This method splits our tweets into groups of 50
     public static List<WordGroup> createWordGroups(ArrayList<FormattedTweet> fTweets){
         List<WordGroup> wordGroups = new ArrayList<>();
         int count = (int)Math.ceil(fTweets.size()/50);

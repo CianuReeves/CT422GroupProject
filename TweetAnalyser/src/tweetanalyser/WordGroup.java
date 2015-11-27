@@ -13,6 +13,8 @@ import java.util.List;
  *
  * @author Cian
  */
+
+//This object contains a group of words.
 public class WordGroup {
     private ArrayList<Word> words = new ArrayList();
     private Date start = new Date();

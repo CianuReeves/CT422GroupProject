@@ -9,6 +9,8 @@ package tweetanalyser;
  *
  * @author Cian
  */
+
+//simple object contains a word and the number of times the word appears in tweets
 public class Word {
     private String word;
     private int count;

@@ -12,6 +12,8 @@ import java.util.List;
  *
  * @author Cian
  */
+
+//This class returns the top 5 most frequent words of a given list of tweets
 public abstract class TopFiveWords {
     public static ArrayList<Word> getTopFive(List<FormattedTweet> tweets){
         ArrayList<Word> words = new ArrayList();

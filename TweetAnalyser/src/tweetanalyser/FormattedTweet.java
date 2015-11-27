@@ -14,7 +14,7 @@ import java.util.Date;
  */
 
 
-//This object will contain the reduced text and timestamp of a tweet only
+//This object will contain the reduced text and timestamp of a tweet only (id is unused)
 public class FormattedTweet {
     private ArrayList<String> text;
     private Date timestamp;
